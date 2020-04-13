@@ -1,5 +1,3 @@
-// 텍스트 기반 RPG 게임
-
 #pragma warning (disable:4996)
 #pragma warning (disable:4244)
 #include <stdio.h>
@@ -14,12 +12,14 @@
 #define YELLOW SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
 #define CYAN SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
 #define GRAY SetConsoleTextAttribute(GetStdHandle( STD_OUTPUT_HANDLE ), 8 );
+//#define CTRL(x) (#x[0]-'a'+1)
 
 int main()
 {
 	int main_choice = 0, buy_choice = 0, random = 0, atk_choice = 0, currentWeaponDamage = 5, currentWeaponId = 0, money = 0, slimeHealth_1 = 3, atkPer = 0;
-	int random1 = 0, slimekill = 0, goblinkill = 0, quest1 = 0, bossHealth = 10000, golemkill=0, health=0, boss_choice=0;
+	int random1 = 0, slimekill = 0, goblinkill = 0, quest1 = 0, bossHealth = 10000, golemkill = 0, health = 0, boss_choice = 0;
 	int bossClearStatus = 0;
+
 	srand(time(NULL));
 	while (1) {
 
@@ -104,7 +104,7 @@ int main()
 			S("%d", &main_choice);
 		WHITE
 			switch (main_choice)
-			{
+		{
 			case 1:
 				CLS
 					P("상점에 오신것을 환영합니다.\n\n현재돈: %d\n\n\n", money);
@@ -372,7 +372,7 @@ int main()
 							CYAN
 								P("파티원: 거기 잠깐!\n");
 							Sleep(2000);
-								P("파티원: 나랑 같이 보스 잡자.\n\n");
+							P("파티원: 나랑 같이 보스 잡자.\n\n");
 							Sleep(2000);
 							WHITE
 								P("사실 현재 무기 [타이탄 검] 에는 특별 능력이 있다.\n바로 [어둠의 혈흔] !\n");
@@ -380,39 +380,42 @@ int main()
 							P("동작 입력창에서 키보드 3번을 누르면 1턴 동안 공격력을 10배로 증가시켜 30%% 확률로 크리티컬 대미지를 준다.\n\n");
 							Sleep(2000);
 							CYAN
-							P("파티원: 내가 너 뒤에서 버프를 줄게.\n");
+								P("파티원: 내가 너 뒤에서 버프를 줄게.\n");
 							WHITE
-							P("아무 키나 눌러 전장에 진입합니다.");
+								P("아무 키나 눌러 전장에 진입합니다.");
 							PAUSE
-							while (bossClearStatus = 0) {
-								CLS
-								YELLOW
-								P("내 체력: %d\n보스 체력: %d\n\n", health, bossHealth);
-								WHITE
-								P("1. 공격\n2. 치유\n3. [어둠의 혈흔]\n4. 상점");
-								CYAN
-								P(">");
-								scanf("%d", &boss_choice);
-								WHITE
-								if (boss_choice == 1) {
+								while (bossClearStatus = 0) {
 									CLS
-									P("보스에게 ");
-									YELLOW
-									P("%d", currentWeaponDamage);
-									P("대미지를 주었습니다.\n");
-									bossHealth -= currentWeaponDamage;
-									random = (rand() % 8) + 1;
-									P("%d코인 획득!", currentWeaponDamage*random);
-									money = money + (currentWeaponDamage*random);
-									random = (rand() % 100) + 1;
-									if (random <= 95) {
-										P("보스에게 공격을 받았습니다. 체력 10 감소!");
-										health -= 5;
+										YELLOW
+										P("내 체력: %d\n보스 체력: %d\n\n", health, bossHealth);
+									WHITE
+										P("1. 공격\n2. 치유\n3. [어둠의 혈흔]\n4. 상점");
+									CYAN
+										P(">");
+									scanf("%d", &boss_choice);
+									WHITE
+										if (boss_choice == 1) {
+											CLS
+												P("보스에게 ");
+											YELLOW
+												P("%d", currentWeaponDamage);
+											P("대미지를 주었습니다.\n");
+											bossHealth -= currentWeaponDamage;
+											random = (rand() % 8) + 1;
+											P("%d코인 획득!", currentWeaponDamage*random);
+											money = money + (currentWeaponDamage*random);
+											random = (rand() % 100) + 1;
+											if (random <= 95) {
+												P("보스에게 공격을 받았습니다. 체력 10 감소!");
+												health -= 5;
+											}
+											if (bossHealth == 0) {
+												//여기부터
+											}
 
-									}
-									}
-							}
-								
+										}
+								}
+
 
 						}
 						else if (currentWeaponId != 10) {
@@ -506,7 +509,7 @@ int main()
 						}
 						if (currentWeaponId == 5) {
 							P("고블린이 나타났다!\n");
-							random = (rand() % 10)+1;
+							random = (rand() % 10) + 1;
 							if (random <= 9) {
 								P("고블린을 죽였다! 800코인 획득!\n");
 								money += 800;
@@ -522,7 +525,7 @@ int main()
 						}
 						if (currentWeaponId == 6) {
 							P("고블린이 나타났다!\n");
-							random = (rand() % 10)+1;
+							random = (rand() % 10) + 1;
 							if (random <= 9) {
 								P("고블린을 죽였다! 1000코인 획득!\n");
 								money += 1000;
@@ -538,7 +541,7 @@ int main()
 						}
 						if (currentWeaponId == 7) {
 							P("고블린이 나타났다!\n");
-							random = (rand() % 10)+1;
+							random = (rand() % 10) + 1;
 							if (random <= 8) {
 								P("고블린을 죽였다! 1500코인 획득!\n");
 								money += 1500;
@@ -554,7 +557,7 @@ int main()
 						}
 						if (currentWeaponId == 8) {
 							P("골렘이 나타났다!\n");
-							random = (rand() % 10)+1;
+							random = (rand() % 10) + 1;
 							if (random <= 8) {
 								P("골렘을 죽였다! 3000코인 획득!\n");
 								money += 3000;
@@ -569,7 +572,7 @@ int main()
 						}
 						if (currentWeaponId == 9) {
 							P("골렘이 나타났다!\n");
-							random = (rand() % 10)+1;
+							random = (rand() % 10) + 1;
 							if (random <= 7) {
 								P("골렘을 죽였다! 5000코인 획득!\n");
 								money += 5000;
@@ -584,7 +587,7 @@ int main()
 						}
 						if (currentWeaponId == 10) {
 							P("골렘이 나타났다!\n");
-							random = (rand() % 10)+1;
+							random = (rand() % 10) + 1;
 							if (random <= 7) {
 								P("골렘이 죽였다! 8000코인 획득!\n");
 								money += 8000;
@@ -640,24 +643,29 @@ int main()
 				P("제작 기간: 2018.2.27~\n");
 				P("===============\n");
 				PAUSE
-				P("플레이 해주셔서 감사합니다.");
+					P("플레이 해주셔서 감사합니다.");
 				PAUSE
 					break;
 
 			case 5:
 				CLS
-				YELLOW
-				P("퀘스트 목록\n\n");
+					YELLOW
+					P("퀘스트 목록\n\n");
 				WHITE
-				P("1. 5만 코인 모으기\n");
+					P("1. 5만 코인 모으기\n");
 				P("2. 슬라임 70킬하기 (현재 %d킬)\n", slimekill);
 				P("3. 고블린 50킬하기 (현재 %d킬)\n", goblinkill);
 				P("4. 골렘 30킬하기 (현재 %d킬)\n", golemkill);
 				PAUSE
+					break;
+
+
+
+
 
 			default:
 				break;
-			}
+		}
 	}
 bye:
 	return 0;
